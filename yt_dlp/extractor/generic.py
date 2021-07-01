@@ -2510,7 +2510,7 @@ class GenericIE(InfoExtractor):
             elif re.match(r'(?i)^(?:{[^}]+})?MPD$', doc.tag):
                 info_dict['formats'], info_dict['subtitles'] = self._parse_mpd_formats_and_subtitles(
                     doc,
-                    mpd_base_url=full_response.geturl().rpartition('/')[0],
+                    mpd_base_url=f'{parsed_url.scheme}://{parsed_url.netloc}{parsed_url.path}'.rpartition('/')[0],
                     mpd_url=url)
                 self._sort_formats(info_dict['formats'])
                 return info_dict
