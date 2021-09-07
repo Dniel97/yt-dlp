@@ -19,6 +19,8 @@ cookies.txt
 *.wav
 *.ape
 *.mkv
+*.flac
+*.avi
 *.swf
 *.part
 *.part-*
@@ -33,6 +35,7 @@ cookies.txt
 *.info.json
 *.live_chat.json
 *.jpg
+*.jpeg
 *.png
 *.webp
 *.annotations.xml
@@ -44,6 +47,7 @@ cookies.txt
 # Python
 *.pyc
 *.pyo
+.pytest_cache
 wine-py2exe/
 py2exe.log
 build/
@@ -78,6 +82,7 @@ README.txt
 *.tar.gz
 *.zsh
 *.spec
+test/testdata/player-*.js
 
 # Binary
 /youtube-dl

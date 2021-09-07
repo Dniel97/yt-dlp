@@ -95,7 +95,9 @@
  - **Bandcamp**
  - **Bandcamp:album**
  - **Bandcamp:weekly**
+ - **BandcampMusic**
  - **bangumi.bilibili.com**: BiliBili番剧
+ - **BannedVideo**
  - **bbc**: BBC
  - **bbc.co.uk**: BBC iPlayer
  - **bbc.co.uk:article**: BBC articles
@@ -117,6 +119,7 @@
  - **Bigflix**
  - **Bild**: Bild.de
  - **BiliBili**
+ - **Bilibili category extractor**
  - **BilibiliAudio**
  - **BilibiliAudioAlbum**
  - **BilibiliChannel**
@@ -129,6 +132,7 @@
  - **BitChuteChannel**
  - **bitwave:replay**
  - **bitwave:stream**
+ - **BlackboardCollaborate**
  - **BleacherReport**
  - **BleacherReportCMS**
  - **Bloomberg**
@@ -151,7 +155,6 @@
  - **Camdemy**
  - **CamdemyFolder**
  - **CamModels**
- - **CamTube**
  - **CamWithHer**
  - **canalc2.tv**
  - **Canalplus**: mycanal.fr and piwiplus.fr
@@ -259,6 +262,7 @@
  - **dlive:vod**
  - **DoodStream**
  - **Dotsub**
+ - **Douyin**
  - **DouyuShow**
  - **DouyuTV**: 斗鱼
  - **DPlay**
@@ -292,8 +296,11 @@
  - **Embedly**
  - **EMPFlix**
  - **Engadget**
+ - **Epicon**
+ - **EpiconSeries**
  - **Eporner**
  - **EroProfile**
+ - **EroProfile:album**
  - **Escapist**
  - **ESPN**
  - **ESPNArticle**
@@ -306,11 +313,13 @@
  - **EyedoTV**
  - **facebook**
  - **FacebookPluginsVideo**
+ - **fancode:live**
  - **fancode:vod**
  - **faz.net**
  - **fc2**
  - **fc2:embed**
  - **Fczenit**
+ - **Filmmodu**
  - **filmon**
  - **filmon:channel**
  - **Filmweb**
@@ -343,9 +352,12 @@
  - **FrontendMastersLesson**
  - **FujiTVFODPlus7**
  - **Funimation**
+ - **funimation:page**
+ - **funimation:show**
  - **Funk**
  - **Fusion**
  - **Fux**
+ - **GabTV**
  - **Gaia**
  - **GameInformer**
  - **GameSpot**
@@ -401,6 +413,7 @@
  - **Huajiao**: 花椒直播
  - **HuffPost**: Huffington Post
  - **Hungama**
+ - **HungamaAlbumPlaylist**
  - **HungamaSong**
  - **Hypem**
  - **ign.com**
@@ -513,6 +526,9 @@
  - **MallTV**
  - **mangomolo:live**
  - **mangomolo:video**
+ - **ManotoTV**: Manoto TV (Episode)
+ - **ManotoTVLive**: Manoto TV (Live)
+ - **ManotoTVShow**: Manoto TV (Show)
  - **ManyVids**
  - **MaoriTV**
  - **Markiza**
@@ -548,6 +564,8 @@
  - **MinistryGrid**
  - **Minoto**
  - **miomio.tv**
+ - **mirrativ**
+ - **mirrativ:user**
  - **MiTele**: mitele.es
  - **mixcloud**
  - **mixcloud:playlist**
@@ -649,6 +667,9 @@
  - **niconico**: ニコニコ動画
  - **NiconicoPlaylist**
  - **NiconicoUser**
+ - **nicovideo:search**: Nico video searches
+ - **nicovideo:search:date**: Nico video searches, newest first
+ - **nicovideo:search_url**: Nico video search URLs
  - **Nintendo**
  - **Nitter**
  - **njoy**: N-JOY
@@ -699,6 +720,8 @@
  - **OnionStudios**
  - **Ooyala**
  - **OoyalaExternal**
+ - **openrec**
+ - **openrec:capture**
  - **OraTV**
  - **orf:burgenland**: Radio Burgenland
  - **orf:fm4**: radio FM4
@@ -724,12 +747,17 @@
  - **PalcoMP3:video**
  - **pandora.tv**: 판도라TV
  - **ParamountNetwork**
+ - **ParamountPlus**
+ - **ParamountPlusSeries**
  - **parliamentlive.tv**: UK parliament videos
  - **Parlview**
  - **Patreon**
+ - **PatreonUser**
  - **pbs**: Public Broadcasting Service (PBS) and member stations: PBS: Public Broadcasting Service, APT - Alabama Public Television (WBIQ), GPB/Georgia Public Broadcasting (WGTV), Mississippi Public Broadcasting (WMPN), Nashville Public Television (WNPT), WFSU-TV (WFSU), WSRE (WSRE), WTCI (WTCI), WPBA/Channel 30 (WPBA), Alaska Public Media (KAKM), Arizona PBS (KAET), KNME-TV/Channel 5 (KNME), Vegas PBS (KLVX), AETN/ARKANSAS ETV NETWORK (KETS), KET (WKLE), WKNO/Channel 10 (WKNO), LPB/LOUISIANA PUBLIC BROADCASTING (WLPB), OETA (KETA), Ozarks Public Television (KOZK), WSIU Public Broadcasting (WSIU), KEET TV (KEET), KIXE/Channel 9 (KIXE), KPBS San Diego (KPBS), KQED (KQED), KVIE Public Television (KVIE), PBS SoCal/KOCE (KOCE), ValleyPBS (KVPT), CONNECTICUT PUBLIC TELEVISION (WEDH), KNPB Channel 5 (KNPB), SOPTV (KSYS), Rocky Mountain PBS (KRMA), KENW-TV3 (KENW), KUED Channel 7 (KUED), Wyoming PBS (KCWC), Colorado Public Television / KBDI 12 (KBDI), KBYU-TV (KBYU), Thirteen/WNET New York (WNET), WGBH/Channel 2 (WGBH), WGBY (WGBY), NJTV Public Media NJ (WNJT), WLIW21 (WLIW), mpt/Maryland Public Television (WMPB), WETA Television and Radio (WETA), WHYY (WHYY), PBS 39 (WLVT), WVPT - Your Source for PBS and More! (WVPT), Howard University Television (WHUT), WEDU PBS (WEDU), WGCU Public Media (WGCU), WPBT2 (WPBT), WUCF TV (WUCF), WUFT/Channel 5 (WUFT), WXEL/Channel 42 (WXEL), WLRN/Channel 17 (WLRN), WUSF Public Broadcasting (WUSF), ETV (WRLK), UNC-TV (WUNC), PBS Hawaii - Oceanic Cable Channel 10 (KHET), Idaho Public Television (KAID), KSPS (KSPS), OPB (KOPB), KWSU/Channel 10 & KTNW/Channel 31 (KWSU), WILL-TV (WILL), Network Knowledge - WSEC/Springfield (WSEC), WTTW11 (WTTW), Iowa Public Television/IPTV (KDIN), Nine Network (KETC), PBS39 Fort Wayne (WFWA), WFYI Indianapolis (WFYI), Milwaukee Public Television (WMVS), WNIN (WNIN), WNIT Public Television (WNIT), WPT (WPNE), WVUT/Channel 22 (WVUT), WEIU/Channel 51 (WEIU), WQPT-TV (WQPT), WYCC PBS Chicago (WYCC), WIPB-TV (WIPB), WTIU (WTIU), CET  (WCET), ThinkTVNetwork (WPTD), WBGU-TV (WBGU), WGVU TV (WGVU), NET1 (KUON), Pioneer Public Television (KWCM), SDPB Television (KUSD), TPT (KTCA), KSMQ (KSMQ), KPTS/Channel 8 (KPTS), KTWU/Channel 11 (KTWU), East Tennessee PBS (WSJK), WCTE-TV (WCTE), WLJT, Channel 11 (WLJT), WOSU TV (WOSU), WOUB/WOUC (WOUB), WVPB (WVPB), WKYU-PBS (WKYU), KERA 13 (KERA), MPBN (WCBB), Mountain Lake PBS (WCFE), NHPTV (WENH), Vermont PBS (WETK), witf (WITF), WQED Multimedia (WQED), WMHT Educational Telecommunications (WMHT), Q-TV (WDCQ), WTVS Detroit Public TV (WTVS), CMU Public Television (WCMU), WKAR-TV (WKAR), WNMU-TV Public TV 13 (WNMU), WDSE - WRPT (WDSE), WGTE TV (WGTE), Lakeland Public Television (KAWE), KMOS-TV - Channels 6.1, 6.2 and 6.3 (KMOS), MontanaPBS (KUSM), KRWG/Channel 22 (KRWG), KACV (KACV), KCOS/Channel 13 (KCOS), WCNY/Channel 24 (WCNY), WNED (WNED), WPBS (WPBS), WSKG Public TV (WSKG), WXXI (WXXI), WPSU (WPSU), WVIA Public Media Studios (WVIA), WTVI (WTVI), Western Reserve PBS (WNEO), WVIZ/PBS ideastream (WVIZ), KCTS 9 (KCTS), Basin PBS (KPBT), KUHT / Channel 8 (KUHT), KLRN (KLRN), KLRU (KLRU), WTJX Channel 12 (WTJX), WCVE PBS (WCVE), KBTC Public Television (KBTC)
  - **PearVideo**
  - **PeerTube**
+ - **peloton**
+ - **peloton:live**: Peloton Live
  - **People**
  - **PerformGroup**
  - **periscope**: Periscope
@@ -766,9 +794,11 @@
  - **PopcornTV**
  - **PornCom**
  - **PornerBros**
+ - **PornFlip**
  - **PornHd**
  - **PornHub**: PornHub and Thumbzilla
  - **PornHubPagedVideoList**
+ - **PornHubPlaylist**
  - **PornHubUser**
  - **PornHubUserVideosUpload**
  - **Pornotube**
@@ -776,6 +806,7 @@
  - **PornoXO**
  - **PornTube**
  - **PressTV**
+ - **ProjectVeritas**
  - **prosiebensat1**: ProSiebenSat.1 Digital
  - **puhutv**
  - **puhutv:serie**
@@ -792,6 +823,8 @@
  - **QuicklineLive**
  - **R7**
  - **R7Article**
+ - **Radiko**
+ - **RadikoRadio**
  - **radio.de**
  - **radiobremen**
  - **radiocanada**
@@ -808,6 +841,9 @@
  - **RCS**
  - **RCSEmbeds**
  - **RCSVarious**
+ - **RCTIPlus**
+ - **RCTIPlusSeries**
+ - **RCTIPlusTV**
  - **RDS**: RDS.ca
  - **RedBull**
  - **RedBullEmbed**
@@ -866,6 +902,7 @@
  - **savefrom.net**
  - **SBS**: sbs.com.au
  - **schooltv**
+ - **ScienceChannel**
  - **screen.yahoo:search**: Yahoo screen search
  - **Screencast**
  - **ScreencastOMatic**
@@ -938,6 +975,7 @@
  - **SRGSSR**
  - **SRGSSRPlay**: srf.ch, rts.ch, rsi.ch, rtr.ch and swissinfo.ch play sites
  - **stanfordoc**: Stanford Open ClassRoom
+ - **startv**
  - **Steam**
  - **Stitcher**
  - **StitcherShow**
@@ -1004,13 +1042,15 @@
  - **ThisAmericanLife**
  - **ThisAV**
  - **ThisOldHouse**
- - **ThisVid**
  - **TikTok**
+ - **tiktok:user**
  - **tinypic**: tinypic.com videos
  - **TMZ**
  - **TNAFlix**
  - **TNAFlixNetworkEmbed**
  - **toggle**
+ - **Tokentube**
+ - **Tokentube:channel**
  - **ToonGoggles**
  - **tou.tv**
  - **Toypics**: Toypics video
@@ -1033,10 +1073,11 @@
  - **Turbo**
  - **tv.dfb.de**
  - **TV2**
- - **tv2.hu**
  - **TV2Article**
  - **TV2DK**
  - **TV2DKBornholmPlay**
+ - **tv2play.hu**
+ - **tv2playseries.hu**
  - **TV4**: tv4.se and tv4play.se
  - **TV5MondePlus**: TV5MONDE+
  - **tv5unis**
@@ -1101,6 +1142,7 @@
  - **ustream:channel**
  - **ustudio**
  - **ustudio:embed**
+ - **Utreon**
  - **Varzesh3**
  - **Vbox7**
  - **VeeHD**
@@ -1169,6 +1211,8 @@
  - **VODPl**
  - **VODPlatform**
  - **VoiceRepublic**
+ - **voicy**
+ - **voicy:channel**
  - **Voot**
  - **VootSeries**
  - **VoxMedia**

@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 import itertools
 import re
 import json
-import random
+# import random
 
 from .common import (
     InfoExtractor,
@@ -14,7 +14,6 @@ from ..compat import (
     compat_HTTPError,
     compat_kwargs,
     compat_str,
-    compat_urlparse,
 )
 from ..utils import (
     error_to_compat_str,
@@ -24,6 +23,8 @@ from ..utils import (
     int_or_none,
     KNOWN_EXTENSIONS,
     mimetype2ext,
+    remove_end,
+    parse_qs,
     str_or_none,
     try_get,
     unified_timestamp,
@@ -49,8 +50,7 @@ class SoundcloudEmbedIE(InfoExtractor):
             webpage)]
 
     def _real_extract(self, url):
-        query = compat_urlparse.parse_qs(
-            compat_urlparse.urlparse(url).query)
+        query = parse_qs(url)
         api_url = query['url'][0]
         secret_token = query.get('secret_token')
         if secret_token:
@@ -164,23 +164,11 @@ class SoundcloudIE(InfoExtractor):
         },
         # downloadable song
         {
-            'url': 'https://soundcloud.com/oddsamples/bus-brakes',
-            'md5': '7624f2351f8a3b2e7cd51522496e7631',
+            'url': 'https://soundcloud.com/the80m/the-following',
+            'md5': '9ffcddb08c87d74fb5808a3c183a1d04',
             'info_dict': {
-                'id': '128590877',
-                'ext': 'mp3',
-                'title': 'Bus Brakes',
-                'description': 'md5:0053ca6396e8d2fd7b7e1595ef12ab66',
-                'uploader': 'oddsamples',
-                'uploader_id': '73680509',
-                'timestamp': 1389232924,
-                'upload_date': '20140109',
-                'duration': 17.346,
-                'license': 'cc-by-sa',
-                'view_count': int,
-                'like_count': int,
-                'comment_count': int,
-                'repost_count': int,
+                'id': '343609555',
+                'ext': 'wav',
             },
         },
         # private link, downloadable format
@@ -307,7 +295,7 @@ class SoundcloudIE(InfoExtractor):
             try:
                 return super(SoundcloudIE, self)._download_json(*args, **compat_kwargs(kwargs))
             except ExtractorError as e:
-                if isinstance(e.cause, compat_HTTPError) and e.cause.code == 401:
+                if isinstance(e.cause, compat_HTTPError) and e.cause.code in (401, 403):
                     self._store_client_id(None)
                     self._update_client_id()
                     continue
@@ -317,12 +305,13 @@ class SoundcloudIE(InfoExtractor):
                 raise
 
     def _real_initialize(self):
-        self._CLIENT_ID = self._downloader.cache.load('soundcloud', 'client_id') or "T5R4kgWS2PRf6lzLyIravUMnKlbIxQag"  # 'EXLwg5lHTO2dslU5EePe3xkw0m1h86Cd' # 'YUKXoArFcqrlQn9tfNHvvyfnDISj04zk'
+        self._CLIENT_ID = self._downloader.cache.load('soundcloud', 'client_id') or 'fSSdm5yTnDka1g0Fz1CO5Yx6z0NbeHAj'
         self._login()
 
-    _USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"
+    _USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'
     _API_AUTH_QUERY_TEMPLATE = '?client_id=%s'
     _API_AUTH_URL_PW = 'https://api-auth.soundcloud.com/web-auth/sign-in/password%s'
+    _API_VERIFY_AUTH_TOKEN = 'https://api-auth.soundcloud.com/connect/session%s'
     _access_token = None
     _HEADERS = {}
     _NETRC_MACHINE = 'soundcloud'
@@ -332,6 +321,23 @@ class SoundcloudIE(InfoExtractor):
         if username is None:
             return
 
+        if username == 'oauth' and password is not None:
+            self._access_token = password
+            query = self._API_AUTH_QUERY_TEMPLATE % self._CLIENT_ID
+            payload = {'session': {'access_token': self._access_token}}
+            token_verification = sanitized_Request(self._API_VERIFY_AUTH_TOKEN % query, json.dumps(payload).encode('utf-8'))
+            response = self._download_json(token_verification, None, note='Verifying login token...', fatal=False)
+            if response is not False:
+                self._HEADERS = {'Authorization': 'OAuth ' + self._access_token}
+                self.report_login()
+            else:
+                self.report_warning('Provided authorization token seems to be invalid. Continue as guest')
+        elif username is not None:
+            self.report_warning(
+                'Login using username and password is not currently supported. '
+                'Use "--user oauth --password <oauth_token>" to login using an oauth token')
+
+        r'''
         def genDevId():
             def genNumBlock():
                 return ''.join([str(random.randrange(10)) for i in range(6)])
@@ -358,6 +364,7 @@ class SoundcloudIE(InfoExtractor):
             self.report_warning('Unable to get access token, login may has failed')
         else:
             self._HEADERS = {'Authorization': 'OAuth ' + self._access_token}
+        '''
 
     # signature generation
     def sign(self, user, pw, clid):
@@ -370,9 +377,9 @@ class SoundcloudIE(InfoExtractor):
         b = 37
         k = 37
         c = 5
-        n = "0763ed7314c69015fd4a0dc16bbf4b90"  # _KEY
-        y = "8"  # _REV
-        r = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36"  # _USER_AGENT
+        n = '0763ed7314c69015fd4a0dc16bbf4b90'  # _KEY
+        y = '8'  # _REV
+        r = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/84.0.4147.105 Safari/537.36'  # _USER_AGENT
         e = user  # _USERNAME
         t = clid  # _CLIENT_ID
 
@@ -550,7 +557,7 @@ class SoundcloudIE(InfoExtractor):
         }
 
     def _real_extract(self, url):
-        mobj = re.match(self._VALID_URL, url)
+        mobj = self._match_valid_url(url)
 
         track_id = mobj.group('track_id')
 
@@ -630,7 +637,7 @@ class SoundcloudSetIE(SoundcloudPlaylistBaseIE):
     }]
 
     def _real_extract(self, url):
-        mobj = re.match(self._VALID_URL, url)
+        mobj = self._match_valid_url(url)
 
         full_title = '%s/sets/%s' % mobj.group('uploader', 'slug_title')
         token = mobj.group('token')
@@ -649,64 +656,58 @@ class SoundcloudSetIE(SoundcloudPlaylistBaseIE):
 
 class SoundcloudPagedPlaylistBaseIE(SoundcloudIE):
     def _extract_playlist(self, base_url, playlist_id, playlist_title):
-        # Per the SoundCloud documentation, the maximum limit for a linked partitioning query is 200.
-        # https://developers.soundcloud.com/blog/offset-pagination-deprecated
-        COMMON_QUERY = {
-            'limit': 200,
-            'linked_partitioning': '1',
-        }
-
-        query = COMMON_QUERY.copy()
-        query['offset'] = 0
-
-        next_href = base_url
-
-        entries = []
-        for i in itertools.count():
-            response = self._download_json(
-                next_href, playlist_id,
-                'Downloading track page %s' % (i + 1), query=query, headers=self._HEADERS)
-
-            collection = response['collection']
-
-            if not isinstance(collection, list):
-                collection = []
-
-            # Empty collection may be returned, in this case we proceed
-            # straight to next_href
-
-            def resolve_entry(candidates):
-                for cand in candidates:
-                    if not isinstance(cand, dict):
-                        continue
-                    permalink_url = url_or_none(cand.get('permalink_url'))
-                    if not permalink_url:
-                        continue
-                    return self.url_result(
-                        permalink_url,
-                        SoundcloudIE.ie_key() if SoundcloudIE.suitable(permalink_url) else None,
-                        str_or_none(cand.get('id')), cand.get('title'))
-
-            for e in collection:
-                entry = resolve_entry((e, e.get('track'), e.get('playlist')))
-                if entry:
-                    entries.append(entry)
-
-            next_href = response.get('next_href')
-            if not next_href:
-                break
-
-            next_href = response['next_href']
-            parsed_next_href = compat_urlparse.urlparse(next_href)
-            query = compat_urlparse.parse_qs(parsed_next_href.query)
-            query.update(COMMON_QUERY)
-
         return {
             '_type': 'playlist',
             'id': playlist_id,
             'title': playlist_title,
-            'entries': entries,
+            'entries': self._entries(base_url, playlist_id),
         }
+
+    def _entries(self, url, playlist_id):
+        # Per the SoundCloud documentation, the maximum limit for a linked partitioning query is 200.
+        # https://developers.soundcloud.com/blog/offset-pagination-deprecated
+        query = {
+            'limit': 200,
+            'linked_partitioning': '1',
+            'offset': 0,
+        }
+
+        retries = self.get_param('extractor_retries', 3)
+
+        for i in itertools.count():
+            attempt, last_error = -1, None
+            while attempt < retries:
+                attempt += 1
+                if last_error:
+                    self.report_warning('%s. Retrying ...' % remove_end(last_error, '.'), playlist_id)
+                try:
+                    response = self._download_json(
+                        url, playlist_id, query=query, headers=self._HEADERS,
+                        note='Downloading track page %s%s' % (i + 1, f' (retry #{attempt})' if attempt else ''))
+                    break
+                except ExtractorError as e:
+                    # Downloading page may result in intermittent 502 HTTP error
+                    # See https://github.com/yt-dlp/yt-dlp/issues/872
+                    if attempt >= retries or not isinstance(e.cause, compat_HTTPError) or e.cause.code != 502:
+                        raise
+                    last_error = str(e.cause or e.msg)
+
+            def resolve_entry(*candidates):
+                for cand in candidates:
+                    if not isinstance(cand, dict):
+                        continue
+                    permalink_url = url_or_none(cand.get('permalink_url'))
+                    if permalink_url:
+                        return self.url_result(
+                            permalink_url,
+                            SoundcloudIE.ie_key() if SoundcloudIE.suitable(permalink_url) else None,
+                            str_or_none(cand.get('id')), cand.get('title'))
+
+            for e in response['collection'] or []:
+                yield resolve_entry(e, e.get('track'), e.get('playlist'))
+
+            url = response.get('next_href')
+            query.pop('offset', None)
 
 
 class SoundcloudUserIE(SoundcloudPagedPlaylistBaseIE):
@@ -782,7 +783,7 @@ class SoundcloudUserIE(SoundcloudPagedPlaylistBaseIE):
     }
 
     def _real_extract(self, url):
-        mobj = re.match(self._VALID_URL, url)
+        mobj = self._match_valid_url(url)
         uploader = mobj.group('user')
 
         user = self._download_json(
@@ -835,7 +836,7 @@ class SoundcloudPlaylistIE(SoundcloudPlaylistBaseIE):
     }]
 
     def _real_extract(self, url):
-        mobj = re.match(self._VALID_URL, url)
+        mobj = self._match_valid_url(url)
         playlist_id = mobj.group('id')
 
         query = {}

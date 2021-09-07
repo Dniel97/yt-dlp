@@ -1,6 +1,5 @@
 from __future__ import unicode_literals
 
-import re
 
 from .common import InfoExtractor
 from ..utils import (
@@ -98,10 +97,12 @@ class RedditRIE(InfoExtractor):
     }]
 
     def _real_extract(self, url):
-        mobj = re.match(self._VALID_URL, url)
+        mobj = self._match_valid_url(url)
         url, video_id = mobj.group('url', 'id')
 
         video_id = self._match_id(url)
+
+        self._set_cookie('reddit.com', '_options', '%7B%22pref_quarantine_optin%22%3A%20true%7D')
 
         data = self._download_json(
             url + '/.json', video_id)[0]['data']['children'][0]['data']
